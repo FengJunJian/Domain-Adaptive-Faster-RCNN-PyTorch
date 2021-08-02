@@ -28,6 +28,8 @@ note = {Accessed: [Insert date here]}
 ## Installation
 
 Please follow the instruction in [maskrcnn-benchmark](https://github.com/facebookresearch/maskrcnn-benchmark) to install and use Domain-Adaptive-Faster-RCNN-PyTorch.
+Installation for Win10, please refer to [win10 安装maskrcnn-benchmark 教程](https://www.jianshu.com/p/e9680d0bfa5c)
+
 ## Example Usage
 An example of Domain Adaptive Faster R-CNN with FPN adapting from **Cityscapes** dataset to **Foggy Cityscapes** dataset is provided:
 1. Follow the example in [Detectron-DA-Faster-RCNN](https://github.com/krumo/Detectron-DA-Faster-RCNN) to download dataset and generate coco style annoation files
