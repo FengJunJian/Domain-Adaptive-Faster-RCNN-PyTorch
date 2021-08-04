@@ -27,7 +27,8 @@ import os
 import scipy.misc
 import sys
 
-import cityscapesscripts.evaluation.instances2dict_with_polygons as cs
+#import cityscapesscripts.evaluation.instances2dict_with_polygons as cs
+import tools.cityscapes.instances2dict_with_polygons as cs
 import numpy as np
 
 def parse_args():
@@ -35,13 +36,13 @@ def parse_args():
     parser.add_argument(
         '--dataset', help="cityscapes_car_only", default="cityscapes_car_only", type=str)
     parser.add_argument(
-        '--outdir', help="output dir for json files", default=None, type=str)
+        '--outdir', help="output dir for json files", default='car_only', type=str)
     parser.add_argument(
         '--datadir', help="data dir for annotations to be converted",
-        default=None, type=str)
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit(1)
+        default='leftImg8bit_trainvaltest', type=str)
+    # if len(sys.argv) == 1:
+    #     parser.print_help()
+    #     sys.exit(1)
     return parser.parse_args()
 
 def xyxy_to_xywh(xyxy):
@@ -93,9 +94,13 @@ def convert_cityscapes_car_only(
         # 'gtCoarse_train_extra'
     ]
     ann_dirs = [
-        'gtFine_trainvaltest/gtFine/val',
-        'gtFine_trainvaltest/gtFine/train',
+        # 'gtFine_trainvaltest/gtFine/val',
+        # 'gtFine_trainvaltest/gtFine/train',
         # 'gtFine_trainvaltest/gtFine/test',
+
+        'gtFine/val',
+        'gtFine/train',
+        # 'gtFine/test',
 
         # 'gtCoarse/train',
         # 'gtCoarse/train_extra',
@@ -190,6 +195,8 @@ def convert_cityscapes_car_only(
 if __name__ == '__main__':
     args = parse_args()
     if args.dataset == "cityscapes_car_only":
+        if not os.path.exists(args.outdir):
+            os.mkdir(args.outdir)
         convert_cityscapes_car_only(args.datadir, args.outdir)
     else:
         print("Dataset not supported: %s" % args.dataset)

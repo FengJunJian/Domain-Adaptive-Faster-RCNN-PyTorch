@@ -7,8 +7,8 @@ from __future__ import print_function, absolute_import, division
 import os, sys
 
 sys.path.append( os.path.normpath( os.path.join( os.path.dirname( __file__ ) , '..' , 'helpers' ) ) )
-from csHelpers import *
-
+#from csHelpers import *
+#from cityscapesscripts.helpers.csHelpers import *
 # Cityscapes imports
 from cityscapesscripts.evaluation.instance import *
 from cityscapesscripts.helpers.csHelpers import *
@@ -56,7 +56,8 @@ def instances2dict_with_polygons(imageFileList, verbose=False):
 
             instances[id2label[instanceObj.labelID].name].append(instanceObj_dict)
 
-        imgKey = os.path.abspath(imageFileName)
+        # imgKey = os.path.abspath(imageFileName)
+        imgKey=imageFileName
         instanceDict[imgKey] = instances
         imgCount += 1
 

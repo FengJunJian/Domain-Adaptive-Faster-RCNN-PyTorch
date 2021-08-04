@@ -30,21 +30,22 @@ import scipy.misc
 import sys
 import numpy as np
 
-import cityscapesscripts.evaluation.instances2dict_with_polygons as cs
+#import cityscapesscripts.evaluation.instances2dict_with_polygons as cs
+import tools.cityscapes.instances2dict_with_polygons as cs
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Convert dataset')
     parser.add_argument(
-        '--dataset', help="foggy_cityscapes", default=None, type=str)
+        '--dataset', help="foggy_cityscapes", default='foggy_cityscapes', type=str)
     parser.add_argument(
-        '--outdir', help="output dir for json files", default=None, type=str)
+        '--outdir', help="output dir for json files", default='car_only_foggy', type=str)
     parser.add_argument(
         '--datadir', help="data dir for annotations to be converted",
-        default=None, type=str)
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit(1)
+        default='leftImg8bit_trainvaltest_foggy', type=str)
+    # if len(sys.argv) == 1:
+    #     parser.print_help()
+    #     sys.exit(1)
     return parser.parse_args()
 
 def xyxy_to_xywh(xyxy):
@@ -97,10 +98,13 @@ def convert_foggy_cityscapes_instance_only(
         # 'gtCoarse_train_extra'
     ]
     ann_dirs = [
-        'gtFine_trainvaltest/gtFine/val',
-        'gtFine_trainvaltest/gtFine/train',
-        'gtFine_trainvaltest/gtFine/test',
+        # 'gtFine_trainvaltest/gtFine/val',
+        # 'gtFine_trainvaltest/gtFine/train',
+        # 'gtFine_trainvaltest/gtFine/test',
 
+        'gtFine/val',
+        'gtFine/train',
+        'gtFine/test',
         # 'gtCoarse/train',
         # 'gtCoarse/train_extra',
         # 'gtCoarse/val'
@@ -147,7 +151,7 @@ def convert_foggy_cityscapes_instance_only(
                     image['width'] = json_ann['imgWidth']
                     image['height'] = json_ann['imgHeight']
                     image['file_name'] = filename[:-len(
-                        ends_in % data_set.split('_')[0])] + 'leftImg8bit_foggy_beta_0.02.png'
+                        ends_in % data_set.split('_')[0])] + 'leftImg8bit_foggy_beta_0.02.png'#beta 0.02
                     image['seg_file_name'] = filename[:-len(
                         ends_in % data_set.split('_')[0])] + \
                         '%s_instanceIds.png' % data_set.split('_')[0]
@@ -205,6 +209,8 @@ def convert_foggy_cityscapes_instance_only(
 if __name__ == '__main__':
     args = parse_args()
     if args.dataset == "foggy_cityscapes":
+        if not os.path.exists(args.outdir):
+            os.mkdir(args.outdir)
         convert_foggy_cityscapes_instance_only(args.datadir, args.outdir)
     else:
         print("Dataset not supported: %s" % args.dataset)

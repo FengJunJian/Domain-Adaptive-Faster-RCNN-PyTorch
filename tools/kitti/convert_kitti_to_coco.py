@@ -8,15 +8,15 @@ import sys
 def parse_args():
     parser = argparse.ArgumentParser(description='Convert dataset')
     parser.add_argument(
-        '--dataset', help="kitti", default=None, type=str)
+        '--dataset', help="kitti", default='kitti', type=str)
     parser.add_argument(
-        '--outdir', help="output dir for json files", default=None, type=str)
+        '--outdir', help="output dir for json files", default='kitti_outdir', type=str)
     parser.add_argument(
         '--datadir', help="data dir for annotations to be converted",
-        default=None, type=str)
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit(1)
+        default='./', type=str)
+    # if len(sys.argv) == 1:
+    #     parser.print_help()
+    #     sys.exit(1)
     return parser.parse_args()
 
 def xyxy_to_xywh(xyxy_box):
@@ -118,6 +118,8 @@ def convert_kitti_car_only(
 if __name__ == '__main__':
     args = parse_args()
     if args.dataset == "kitti":
+        if not os.path.exists(args.outdir):
+            os.mkdir(args.outdir)
         convert_kitti_car_only(args.datadir, args.outdir)
     else:
         print("Dataset not supported: %s" % args.dataset)
