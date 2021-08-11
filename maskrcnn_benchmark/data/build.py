@@ -165,7 +165,7 @@ def make_data_loader(cfg, is_train=True, is_source=True, is_distributed=False, s
         dataset_list = cfg.DATASETS.TEST
 
 
-    transforms = build_transforms(cfg, is_train)
+    transforms = build_transforms(cfg, is_train)#preprocessing
     datasets = build_dataset(dataset_list, transforms, DatasetCatalog, is_train, is_source)
 
     data_loaders = []
