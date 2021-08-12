@@ -8,6 +8,7 @@ import torch
 import torch.distributed as dist
 
 from tensorboardX import SummaryWriter
+
 from maskrcnn_benchmark.utils.comm import get_world_size
 from maskrcnn_benchmark.utils.metric_logger import MetricLogger
 
@@ -170,7 +171,9 @@ def do_da_train(
         eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
 
         if iteration % 20 == 0 or iteration == max_iter:
-            writerT.add_scalars('', meters.toDict(), global_step=iteration)
+            for k,v in meters.toDict().items():
+                writerT.add_scalar(tag=k,scalar_value=v, global_step=iteration)
+                writerT.flush()
             print(meters.delimiter.join(
                 [
                     "eta: {eta}",
