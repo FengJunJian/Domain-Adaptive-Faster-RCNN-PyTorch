@@ -10,7 +10,7 @@ class SmoothedValue(object):
     window or the global series average.
     """
 
-    def __init__(self, window_size=20):
+    def __init__(self, window_size=5):
         self.deque = deque(maxlen=window_size)
         self.series = []
         self.total = 0.0
@@ -18,7 +18,7 @@ class SmoothedValue(object):
 
     def update(self, value):
         self.deque.append(value)
-        self.series.append(value)
+        #self.series.append(value)
         self.count += 1
         self.total += value
 
@@ -34,7 +34,7 @@ class SmoothedValue(object):
 
     @property
     def global_avg(self):
-        return self.total / self.count
+        return self.total / self.count #训练开始到结束的平均值
 
 
 class MetricLogger(object):
@@ -48,6 +48,12 @@ class MetricLogger(object):
                 v = v.item()
             assert isinstance(v, (float, int))
             self.meters[k].update(v)
+
+    def toDict(self):
+        Dict={}
+        for name,meter in self.meters.items():
+            Dict[name]=meter.median
+        return Dict
 
     def __getattr__(self, attr):
         if attr in self.meters:
@@ -64,3 +70,6 @@ class MetricLogger(object):
                 "{}: {:.4f} ({:.4f})".format(name, meter.median, meter.global_avg)
             )
         return self.delimiter.join(loss_str)
+
+
+

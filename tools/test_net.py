@@ -22,7 +22,7 @@ def main():
     parser = argparse.ArgumentParser(description="PyTorch Object Detection Inference")
     parser.add_argument(
         "--config-file",
-        default="/private/home/fmassa/github/detectron.pytorch_v2/configs/e2e_faster_rcnn_R_50_C4_1x_caffe2.yaml",
+        default="../configs/da_ship/ship_test_e2e_da_faster_rcnn_R_50_C4_SeaShips2SMD.yaml",# test_e2e_da_faster_rcnn_R_50_C4_cityscapes_to_foggy_cityscapes_car
         metavar="FILE",
         help="path to config file",
     )
@@ -50,7 +50,9 @@ def main():
     cfg.merge_from_list(args.opts)
     cfg.freeze()
 
-    save_dir = ""
+    save_dir = "test"
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
     logger = setup_logger("maskrcnn_benchmark", save_dir, get_rank())
     logger.info("Using {} GPUs".format(num_gpus))
     logger.info(cfg)
@@ -63,7 +65,9 @@ def main():
 
     output_dir = cfg.OUTPUT_DIR
     checkpointer = DetectronCheckpointer(cfg, model, save_dir=output_dir)
-    _ = checkpointer.load(cfg.MODEL.WEIGHT)
+    with open('./last_checkpoint','r') as f:
+        lines=f.readlines()
+    _ = checkpointer.load(os.path.join(cfg.MODEL.WEIGHT,lines[-1]))
 
     iou_types = ("bbox",)
     if cfg.MODEL.MASK_ON:

@@ -7,6 +7,7 @@ import os
 import torch
 from tqdm import tqdm
 
+from maskrcnn_benchmark.utils import comm
 from maskrcnn_benchmark.data.datasets.evaluation import evaluate
 from ..utils.comm import is_main_process
 from ..utils.comm import all_gather
@@ -64,11 +65,12 @@ def inference(
 ):
     # convert to a torch.device for efficiency
     device = torch.device(device)
-    num_devices = (
-        torch.distributed.get_world_size()
-        if torch.distributed.is_initialized()
-        else 1
-    )
+    num_devices=int(os.environ["WORLD_SIZE"]) if "WORLD_SIZE" in os.environ else 1
+    # num_devices = (
+    #     torch.distributed.get_world_size()
+    #     if torch.distributed.is_initialized()
+    #     else 1
+    # )
     logger = logging.getLogger("maskrcnn_benchmark.inference")
     dataset = data_loader.dataset
     logger.info("Start evaluation on {} dataset({} images).".format(dataset_name, len(dataset)))

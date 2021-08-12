@@ -11,6 +11,7 @@ import argparse
 import os
 
 import torch
+#import torchvision
 from maskrcnn_benchmark.config import cfg
 from maskrcnn_benchmark.data import make_data_loader
 from maskrcnn_benchmark.solver import make_lr_scheduler
@@ -141,7 +142,7 @@ def main():
     parser = argparse.ArgumentParser(description="PyTorch Object Detection Training")
     parser.add_argument(
         "--config-file",
-        default="",
+        default="../configs/da_ship/da_faster_rcnn_R_50_C4_SeaShips_SMD.yaml",#
         metavar="FILE",
         help="path to config file",
         type=str,
@@ -152,6 +153,7 @@ def main():
         dest="skip_test",
         help="Do not test the final model",
         action="store_true",
+        default=False
     )
     parser.add_argument(
         "opts",
@@ -185,6 +187,9 @@ def main():
     logger.info(args)
 
     logger.info("Collecting env info (might take some time)")
+    # import importlib
+    # import sys
+    # importlib.reload(sys)
     logger.info("\n" + collect_env_info())
 
     logger.info("Loaded configuration file {}".format(args.config_file))
@@ -197,6 +202,7 @@ def main():
 
     if not args.skip_test:
         test(cfg, model, args.distributed)
+
 
 
 if __name__ == "__main__":

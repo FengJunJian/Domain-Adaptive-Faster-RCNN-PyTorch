@@ -20,9 +20,10 @@ from maskrcnn_benchmark.utils.miscellaneous import mkdir
 
 def main():
     parser = argparse.ArgumentParser(description="PyTorch Object Detection Inference")
+
     parser.add_argument(
         "--config-file",
-        default="/private/home/fmassa/github/detectron.pytorch_v2/configs/e2e_faster_rcnn_R_50_C4_1x_caffe2.yaml",
+        default="../configs/da_faster_rcnn/test_e2e_da_faster_rcnn_R_50_C4_cityscapes_to_foggy_cityscapes_car.yaml",
         metavar="FILE",
         help="path to config file",
     )
@@ -33,6 +34,7 @@ def main():
         default=None,
         nargs=argparse.REMAINDER,
     )
+##########
 
     args = parser.parse_args()
 
@@ -50,7 +52,9 @@ def main():
     cfg.merge_from_list(args.opts)
     cfg.freeze()
 
-    save_dir = ""
+    save_dir = "test"
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
     logger = setup_logger("maskrcnn_benchmark", save_dir, get_rank())
     logger.info("Using {} GPUs".format(num_gpus))
     logger.info(cfg)

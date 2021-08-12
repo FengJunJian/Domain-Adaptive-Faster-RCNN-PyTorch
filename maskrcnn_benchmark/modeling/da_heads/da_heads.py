@@ -19,7 +19,7 @@ class DAImgHead(nn.Module):
             USE_FPN (boolean): whether FPN feature extractor is used
         """
         super(DAImgHead, self).__init__()
-        
+
         self.conv1_da = nn.Conv2d(in_channels, 512, kernel_size=1, stride=1)
         self.conv2_da = nn.Conv2d(512, 1, kernel_size=1, stride=1)
 
@@ -89,7 +89,7 @@ class DomainAdaptationModule(torch.nn.Module):
         self.ins_weight = cfg.MODEL.DA_HEADS.DA_INS_LOSS_WEIGHT
         self.cst_weight = cfg.MODEL.DA_HEADS.DA_CST_LOSS_WEIGHT
 
-        self.grl_img = GradientScalarLayer(-1.0*self.cfg.MODEL.DA_HEADS.DA_IMG_GRL_WEIGHT)
+        self.grl_img = GradientScalarLayer(-1.0*self.cfg.MODEL.DA_HEADS.DA_IMG_GRL_WEIGHT)#GRL
         self.grl_ins = GradientScalarLayer(-1.0*self.cfg.MODEL.DA_HEADS.DA_INS_GRL_WEIGHT)
         self.grl_img_consist = GradientScalarLayer(1.0*self.cfg.MODEL.DA_HEADS.DA_IMG_GRL_WEIGHT)
         self.grl_ins_consist = GradientScalarLayer(1.0*self.cfg.MODEL.DA_HEADS.DA_INS_GRL_WEIGHT)

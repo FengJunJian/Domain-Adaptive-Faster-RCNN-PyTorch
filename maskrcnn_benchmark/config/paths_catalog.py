@@ -5,7 +5,7 @@ import os
 
 
 class DatasetCatalog(object):
-    DATA_DIR = "datasets"
+    DATA_DIR = ''#"datasets"
     DATASETS = {
         "coco_2017_train": {
             "img_dir": "coco/train2017",
@@ -156,6 +156,113 @@ class DatasetCatalog(object):
                 "img_dir": 'watercolor/JPEGImages',
                 "ann_file": 'watercolor/instances_test.json',
         },
+    ####custom
+        'caronly_filtered_gtFine_train_cocostyle':{
+            "img_dir":'cityscapes/leftImg8bit_trainvaltest/images',
+            "ann_file":'cityscapes/annotations/caronly_filtered_gtFine_train_cocostyle.json'
+
+        },
+        'caronly_filtered_gtFine_val_cocostyle':{
+            "img_dir": 'cityscapes/leftImg8bit_trainvaltest/images',
+            "ann_file": 'cityscapes/annotations/caronly_filtered_gtFine_val_cocostyle.json'
+        },
+        'foggy_instancesonly_filtered_gtFine_train_cocostyle':{
+            "img_dir": 'cityscapes/leftImg8bit_trainvaltest_foggy/images',
+            "ann_file": 'cityscapes/annotations/foggy_instancesonly_filtered_gtFine_train_cocostyle.json'
+        },
+        'foggy_instancesonly_filtered_gtFine_val_cocostyle':{
+            "img_dir": 'cityscapes/leftImg8bit_trainvaltest_foggy/images',
+            "ann_file": 'cityscapes/annotations/foggy_instancesonly_filtered_gtFine_val_cocostyle.json'
+        },
+        'kitti_caronly_training_cocostyle': {
+                "img_dir": 'kitti/training/image_2',
+                "ann_file": 'kitti/annotations/kitti_caronly_training_cocostyle.json'
+        },
+
+        #######################Ship dataset#################################
+        'train_SeaShips_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/train_SeaShips_cocostyle.json'
+        },
+        'test_SeaShips_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/test_SeaShips_cocostyle.json'
+        },
+        'train_SMD_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/train_SMD_cocostyle.json'
+        },
+        'test_SMD_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/test_SMD_cocostyle.json'
+        },
+        ##
+        'ship_train_SeaShips_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_train_SeaShips_cocostyle.json'
+        },
+        'ship_test_SeaShips_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_test_SeaShips_cocostyle.json'
+        },
+        'ship_train_SMD_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_train_SMD_cocostyle.json'
+        },
+        'ship_test_SMD_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_test_SMD_cocostyle.json'
+        },
+        ###
+        'label0_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/label0_cocostyle.json'
+        },
+        'unlabel0_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/unlabel0_cocostyle.json'
+        },
+        'test1283_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/test1283_cocostyle.json'
+        },
+
+        ###
+        'label0_SeaShips_SMD_voc': {
+            "data_dir": 'E:/fjj/SeaShips_SMD/',
+            "split": 'label0'
+        },
+        'unlabel0_SeaShips_SMD_voc': {
+            "data_dir": 'E:/fjj/SeaShips_SMD/',
+            "split": 'unlabel0'
+        },
+        'test1283_SeaShips_SMD_voc': {
+            "data_dir": 'E:/fjj/SeaShips_SMD/',
+            "split": 'test1283'
+        },
+
+
+        'ship_train_SeaShips_voc': {
+            "data_dir": 'E:/fjj/SeaShips_SMD/',
+            "split": 'train_SeaShips'
+        },
+        'ship_test_SeaShips_voc': {
+            "data_dir": 'E:/fjj/SeaShips_SMD/',
+            "split": 'test_SeaShips'
+        },
+        'ship_train_SMD_voc': {
+            "data_dir": 'E:/fjj/SeaShips_SMD/',
+            "split": 'train_SMD'
+        },
+        'ship_test_SMD_voc': {
+            "data_dir": 'E:/fjj/SeaShips_SMD/',
+            "split": 'test_SMD'
+        },
+        ###
+
+
+
+
     }
 
     @staticmethod
