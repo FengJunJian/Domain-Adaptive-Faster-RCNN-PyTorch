@@ -19,6 +19,9 @@ def do_coco_evaluation(
     expected_results,
     expected_results_sigma_tol,
 ):
+    import numpy as np
+    import matplotlib.pyplot as plt
+
     logger = logging.getLogger("maskrcnn_benchmark.inference")
 
     if box_only:
@@ -50,6 +53,7 @@ def do_coco_evaluation(
         coco_results['keypoints'] = prepare_for_coco_keypoint(predictions, dataset)
 
     results = COCOResults(*iou_types)
+    pr={}
     logger.info("Evaluating predictions")
     for iou_type in iou_types:
         with tempfile.NamedTemporaryFile() as f:
@@ -59,10 +63,49 @@ def do_coco_evaluation(
             res = evaluate_predictions_on_coco(
                 dataset.coco, coco_results[iou_type], file_path, iou_type
             )
+            # T = len(p.iouThrs)
+            # R = len(p.recThrs)
+            # K = len(p.catIds) if p.useCats else 1
+            # A = len(p.areaRng)
+            # M = len(p.maxDets)
+            # precision = -np.ones((T, R, K, A, M))  # -1 for the precision of absent categories
+            # recall = -np.ones((T, K, A, M))
+            # scores = -np.ones((T, R, K, A, M))
+            # res
+            ################PR curve
+            p_a1 = res.eval['precision'][0, :, 0, 0, 2]#(T, R, K, A, M)
+            r_a1 = res.eval['recall'][0, 0, 0, 2]#(T, K, A, M)
+            # pr_array2 = res.eval['precision'][2, :, 0, 0, 2]
+            # pr_array3 = res.eval['precision'][4, :, 0, 0, 2]
+            x = np.arange(0.0, 1.01, 0.01)
+            # plt.xlabel('recall')
+            # plt.ylabel('precision')
+            # plt.title('PR curve')
+            # plt.xlim(0, 1.0)
+            # plt.ylim(0, 1.01)
+            # plt.grid(True)
+            #
+            # plt.plot(x, p_a1, 'b-', label='IOU=0.5')
+            # # plt.plot(x, pr_array2, 'c-', label='IOU=0.6')
+            # # plt.plot(x, pr_array3, 'y-', label='IOU=0.7')
+            # plt.legend(loc="lower left")
+            # plt.show()
+            #############################################
+            pr[iou_type]={'precision':p_a1,'recall':r_a1}
             results.update(res)
     logger.info(results)
     check_expected_results(results, expected_results, expected_results_sigma_tol)
     if output_folder:
+        with open(os.path.join(output_folder,"coco_results.txt"),'w') as f:
+            for k,v in results.results.items():
+                if isinstance(v,dict):
+                    for k1,v1 in v.items():
+                        f.write(str(k1)+'\t'+str(v1)+'\n')
+        for iou_type in iou_types:
+            with open(os.path.join(output_folder,iou_type+"PR.txt"),'w') as f:
+                for d1,d2 in zip(x,p_a1):
+                    f.write(str(d1)+'\t'+str(d2)+'\n')
+
         torch.save(results, os.path.join(output_folder, "coco_results.pth"))
     return results, coco_results
 
@@ -320,6 +363,17 @@ def evaluate_predictions_on_coco(
     coco_eval.evaluate()
     coco_eval.accumulate()
     coco_eval.summarize()
+
+    # T = len(p.iouThrs)
+    # R = len(p.recThrs)
+    # K = len(p.catIds) if p.useCats else 1
+    # A = len(p.areaRng)
+    # M = len(p.maxDets)
+    # precision = -np.ones((T, R, K, A, M))  # -1 for the precision of absent categories
+    # recall = -np.ones((T, K, A, M))
+    # scores = -np.ones((T, R, K, A, M))
+
+
     return coco_eval
 
 

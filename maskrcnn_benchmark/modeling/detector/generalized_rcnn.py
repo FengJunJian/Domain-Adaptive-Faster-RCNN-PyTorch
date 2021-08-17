@@ -27,9 +27,9 @@ class GeneralizedRCNN(nn.Module):
     def __init__(self, cfg):
         super(GeneralizedRCNN, self).__init__()
 
-        self.backbone = build_backbone(cfg)
-        self.rpn = build_rpn(cfg)
-        self.roi_heads = build_roi_heads(cfg)
+        self.backbone = build_backbone(cfg)#feature extractor  backbone.py
+        self.rpn = build_rpn(cfg) # rpn.py
+        self.roi_heads = build_roi_heads(cfg) #roi_heads
         self.da_heads = build_da_heads(cfg)
 
     def forward(self, images, targets=None):
@@ -45,14 +45,14 @@ class GeneralizedRCNN(nn.Module):
                 like `scores`, `labels` and `mask` (for Mask R-CNN models).
 
         """
-        if self.training and targets is None:
+        if self.training and targets is None:#model forward
             raise ValueError("In training mode, targets should be passed")
-        images = to_image_list(images)
-        features = self.backbone(images.tensors)
-        proposals, proposal_losses = self.rpn(images, features, targets)
+        images = to_image_list(images)#[1,3,608,1088]
+        features = self.backbone(images.tensors)#features [1,1024,38,68]
+        proposals, proposal_losses = self.rpn(images, features, targets)#proposals：[BoxList(num_boxes=1000, image_width=1066, image_height=600, mode=xyxy)]
         da_losses = {}
         if self.roi_heads:
-            x, result, detector_losses, da_ins_feas, da_ins_labels = self.roi_heads(features, proposals, targets)
+            x, result, detector_losses, da_ins_feas, da_ins_labels = self.roi_heads(features, proposals, targets)#x:[1000, 2048, 7, 7], da_ins_feas:[1000, 2048, 7, 7]
             if self.da_heads:
                 da_losses = self.da_heads(features, da_ins_feas, da_ins_labels, targets)
 

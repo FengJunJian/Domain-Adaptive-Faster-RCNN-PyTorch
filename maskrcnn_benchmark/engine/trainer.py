@@ -2,7 +2,7 @@
 import datetime
 import logging
 import time
-
+import os
 
 import torch
 import torch.distributed as dist
@@ -130,9 +130,9 @@ def do_da_train(
     device,
     checkpoint_period,
     arguments,
-    cfg
+    cfg,
 ):
-    writerT = SummaryWriter('log')
+    writerT = SummaryWriter(os.path.join(cfg.OUTPUT_DIR,'even'))
     logger = logging.getLogger("maskrcnn_benchmark.trainer")
     logger.info("Start training")
     meters = MetricLogger(delimiter=" ")

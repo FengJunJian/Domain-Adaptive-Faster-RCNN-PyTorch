@@ -218,13 +218,41 @@ class DatasetCatalog(object):
             "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
             "ann_file": 'E:/fjj/SeaShips_SMD/label0_cocostyle.json'
         },
+        'label1_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/label1_cocostyle.json'
+        },
+        'label2_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/label2_cocostyle.json'
+        },
+        'label3_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/label3_cocostyle.json'
+        },
         'unlabel0_cocostyle': {
             "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
             "ann_file": 'E:/fjj/SeaShips_SMD/unlabel0_cocostyle.json'
         },
+        'unlabel1_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/unlabel1_cocostyle.json'
+        },
+        'unlabel2_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/unlabel2_cocostyle.json'
+        },
+        'unlabel3_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/unlabel3_cocostyle.json'
+        },
         'test1283_cocostyle': {
             "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
             "ann_file": 'E:/fjj/SeaShips_SMD/test1283_cocostyle.json'
+        },
+        'visual_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/visual_cocostyle.json'
         },
 
         ###

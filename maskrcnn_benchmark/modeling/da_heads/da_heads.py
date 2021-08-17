@@ -114,8 +114,8 @@ class DomainAdaptationModule(torch.nn.Module):
                 testing, it is an empty dict.
         """
         if self.resnet_backbone:
-            da_ins_feature = self.avgpool(da_ins_feature)
-        da_ins_feature = da_ins_feature.view(da_ins_feature.size(0), -1)
+            da_ins_feature = self.avgpool(da_ins_feature)#da_ins_feature:[1000, 2048, 1, 1]
+        da_ins_feature = da_ins_feature.view(da_ins_feature.size(0), -1)#[1000, 2048]
 
         img_grl_fea = [self.grl_img(fea) for fea in img_features]
         ins_grl_fea = self.grl_ins(da_ins_feature)

@@ -21,7 +21,7 @@ def compute_on_dataset(model, data_loader, device):
     for i, batch in enumerate(tqdm(data_loader)):
         images, targets, image_ids = batch
         images = images.to(device)
-        with torch.no_grad():
+        with torch.no_grad():# no compute the gradient
             output = model(images)
             output = [o.to(cpu_device) for o in output]
         results_dict.update(
