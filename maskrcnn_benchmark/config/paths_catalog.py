@@ -213,6 +213,10 @@ class DatasetCatalog(object):
             "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
             "ann_file": 'E:/fjj/SeaShips_SMD/ship_test_SMD_cocostyle.json'
         },
+        'ship_test1283_cocostyle':{
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_test1283_cocostyle.json'
+        },
         ###
         'label0_cocostyle': {
             "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
