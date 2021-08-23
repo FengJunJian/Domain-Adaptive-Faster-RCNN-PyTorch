@@ -180,6 +180,9 @@ class DatasetCatalog(object):
         },
 
         #######################Ship dataset#################################
+
+        ####cocostyle
+        ##multiple ship categories
         'train_SeaShips_cocostyle': {
             "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
             "ann_file": 'E:/fjj/SeaShips_SMD/train_SeaShips_cocostyle.json'
@@ -196,28 +199,7 @@ class DatasetCatalog(object):
             "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
             "ann_file": 'E:/fjj/SeaShips_SMD/test_SMD_cocostyle.json'
         },
-        ##
-        'ship_train_SeaShips_cocostyle': {
-            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
-            "ann_file": 'E:/fjj/SeaShips_SMD/ship_train_SeaShips_cocostyle.json'
-        },
-        'ship_test_SeaShips_cocostyle': {
-            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
-            "ann_file": 'E:/fjj/SeaShips_SMD/ship_test_SeaShips_cocostyle.json'
-        },
-        'ship_train_SMD_cocostyle': {
-            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
-            "ann_file": 'E:/fjj/SeaShips_SMD/ship_train_SMD_cocostyle.json'
-        },
-        'ship_test_SMD_cocostyle': {
-            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
-            "ann_file": 'E:/fjj/SeaShips_SMD/ship_test_SMD_cocostyle.json'
-        },
-        'ship_test1283_cocostyle':{
-            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
-            "ann_file": 'E:/fjj/SeaShips_SMD/ship_test1283_cocostyle.json'
-        },
-        ###
+
         'label0_cocostyle': {
             "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
             "ann_file": 'E:/fjj/SeaShips_SMD/label0_cocostyle.json'
@@ -258,8 +240,65 @@ class DatasetCatalog(object):
             "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
             "ann_file": 'E:/fjj/SeaShips_SMD/visual_cocostyle.json'
         },
+        'scale_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/scale_cocostyle.json'
+        },
+        'light_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/light_cocostyle.json'
+        },
+        'occlusion_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/occlusion_cocostyle.json'
+        },
 
-        ###
+        ###only ship category
+        'ship_train_SeaShips_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_train_SeaShips_cocostyle.json'
+        },
+        'ship_test_SeaShips_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_test_SeaShips_cocostyle.json'
+        },
+        'ship_train_SMD_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_train_SMD_cocostyle.json'
+        },
+        'ship_test_SMD_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_test_SMD_cocostyle.json'
+        },
+        'ship_test1283_cocostyle':{
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_test1283_cocostyle.json'
+        },
+
+        'ship_scale_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/scale_cocostyle.json'
+        },
+        'ship_light_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_light_cocostyle.json'
+        },
+        'ship_occlusion_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_occlusion_cocostyle.json'
+        },
+
+
+
+        'ship_test_cocostyle': {
+            "img_dir": 'E:/fjj/SeaShips_SMD/JPEGImages',
+            "ann_file": 'E:/fjj/SeaShips_SMD/ship_test_cocostyle.json'
+        },
+
+
+
+
+        #######voc
         'label0_SeaShips_SMD_voc': {
             "data_dir": 'E:/fjj/SeaShips_SMD/',
             "split": 'label0'
@@ -290,6 +329,7 @@ class DatasetCatalog(object):
             "data_dir": 'E:/fjj/SeaShips_SMD/',
             "split": 'test_SMD'
         },
+
         ###
 
 
