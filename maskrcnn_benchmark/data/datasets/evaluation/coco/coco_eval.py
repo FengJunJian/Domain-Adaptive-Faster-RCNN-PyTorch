@@ -1,6 +1,7 @@
 import logging
 import tempfile
 import os
+import pickle as plk
 import torch
 from collections import OrderedDict
 from tqdm import tqdm
@@ -96,6 +97,8 @@ def do_coco_evaluation(
     logger.info(results)
     check_expected_results(results, expected_results, expected_results_sigma_tol)
     if output_folder:
+        with open(os.path.join(output_folder,"coco_PR"),'wb') as f:
+            plk.dump(res.eval,f)
         with open(os.path.join(output_folder,"coco_results.txt"),'w') as f:
             for k,v in results.results.items():
                 if isinstance(v,dict):
