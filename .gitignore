@@ -31,3 +31,4 @@ dist/
 
 # log files
 *.out
+/tools/deal_PR.py
