@@ -93,7 +93,7 @@ class RPNModule(torch.nn.Module):
             losses (dict[Tensor]): the losses for the model during training. During
                 testing, it is an empty dict.
         """
-        objectness, rpn_box_regression = self.head(features)
+        objectness, rpn_box_regression = self.head(features)#logits, bbox_reg
         anchors = self.anchor_generator(images, features)
 
         if self.training:

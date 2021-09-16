@@ -57,7 +57,7 @@ class RPNPostProcessor(torch.nn.Module):
         # Get the device we're operating on
         device = proposals[0].bbox.device
 
-        gt_boxes = [target.copy_with_fields(['is_source']) for target in targets]
+        gt_boxes = [target.copy_with_fields(['is_source'],skip_missing=True) for target in targets]
 
         # later cat of bbox requires all fields to be present for all bbox
         # so we need to add a dummy for objectness that's missing
@@ -65,11 +65,17 @@ class RPNPostProcessor(torch.nn.Module):
             gt_box.add_field("objectness", torch.ones(len(gt_box), device=device))
 
         new_proposals = []
+
         for proposal, gt_box in zip(proposals, gt_boxes):
-            if gt_box.get_field('is_source').any():
+            if gt_box.has_field('is_source'):
+                if gt_box.get_field('is_source').any():
+                    new_proposals.append(cat_boxlist((proposal, gt_box.copy_with_fields(['objectness']))))
+                else:
+                    new_proposals.append(proposal)
+            else:#for pure faster rcnn
                 new_proposals.append(cat_boxlist((proposal, gt_box.copy_with_fields(['objectness']))))
-            else:
-                new_proposals.append(proposal)
+
+
 
         return new_proposals
 

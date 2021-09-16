@@ -363,7 +363,10 @@ class DatasetCatalog(object):
             )
         raise RuntimeError("Dataset not available: {}".format(name))
 
-
+'''
+More information of the pretrained models, please reference to the url
+https://github.com/facebookresearch/Detectron/blob/main/MODEL_ZOO.md
+'''
 class ModelCatalog(object):
     S3_C2_DETECTRON_URL = "https://dl.fbaipublicfiles.com/detectron"
     C2_IMAGENET_MODELS = {

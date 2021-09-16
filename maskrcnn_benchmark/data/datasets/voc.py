@@ -73,7 +73,7 @@ class PascalVOCDataset(torch.utils.data.Dataset):
         self.ids = [x.strip("\n") for x in self.ids]
         self.id_to_img_map = {k: v for k, v in enumerate(self.ids)}
 
-        cls = PascalVOCDataset.CLASSES
+        cls = [c.lower() for c in PascalVOCDataset.CLASSES]
         self.class_to_ind = dict(zip(cls, range(len(cls))))
 
     def __getitem__(self, index):
@@ -109,7 +109,9 @@ class PascalVOCDataset(torch.utils.data.Dataset):
         TO_REMOVE = 1
         
         for obj in target.iter("object"):
-            difficult = int(obj.find("difficult").text) == 1
+            difficult=False
+            if obj.find("difficult") is not None:
+                difficult = int(obj.find("difficult").text) == 1
             if not self.keep_difficult and difficult:
                 continue
             name = obj.find("name").text.lower().strip()

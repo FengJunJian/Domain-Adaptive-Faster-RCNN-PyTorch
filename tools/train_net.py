@@ -101,6 +101,7 @@ def train(cfg, local_rank, distributed):
             device,
             checkpoint_period,
             arguments,
+            cfg,
         )
 
     return model
@@ -142,7 +143,7 @@ def main():
     parser = argparse.ArgumentParser(description="PyTorch Object Detection Training")
     parser.add_argument(
         "--config-file",
-        default="../configs/da_ship/da_faster_rcnn_R_50_C4_SeaShips_SMD03.yaml",#
+        default="../configs/da_ship/da_faster_rcnn_R_50_FPN_SeaShips_SMD00.yaml",#"../configs/da_ship/da_faster_rcnn_R_50_C4_SeaShips_SMD03.yaml",#
         metavar="FILE",
         help="path to config file",
         type=str,
@@ -158,7 +159,8 @@ def main():
     parser.add_argument(
         "opts",
         help="Modify config options using the command-line",
-        default=None,
+        default=['OUTPUT_DIR','logFRCNN0'
+        ],
         nargs=argparse.REMAINDER,type=str,
     )
 

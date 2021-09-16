@@ -37,10 +37,11 @@ def build_dataset(dataset_list, transforms, dataset_catalog, is_train=True, is_s
         # during training
         if data["factory"] == "COCODataset":
             args["remove_images_without_annotations"] = is_train
+            args["is_source"] = is_source
         if data["factory"] == "PascalVOCDataset":
             args["use_difficult"] = not is_train
         args["transforms"] = transforms
-        args["is_source"] = is_source
+
         # make dataset from factory
         dataset = factory(**args)
         datasets.append(dataset)
@@ -170,11 +171,11 @@ def make_data_loader(cfg, is_train=True, is_source=True, is_distributed=False, s
 
     data_loaders = []
     for dataset in datasets:
-        sampler = make_data_sampler(dataset, shuffle, is_distributed)
+        sampler = make_data_sampler(dataset, shuffle, is_distributed)#data sampler 生成样本索引顺序
         batch_sampler = make_batch_data_sampler(
-            dataset, sampler, aspect_grouping, images_per_gpu, num_iters, start_iter
+            dataset, sampler, aspect_grouping, images_per_gpu, num_iters, start_iter#batch sampler
         )
-        collator = BatchCollator(cfg.DATALOADER.SIZE_DIVISIBILITY)
+        collator = BatchCollator(cfg.DATALOADER.SIZE_DIVISIBILITY)#data collator 数据输出模式
         num_workers = cfg.DATALOADER.NUM_WORKERS
         data_loader = torch.utils.data.DataLoader(
             dataset,
