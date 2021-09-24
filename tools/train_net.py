@@ -52,6 +52,7 @@ def train(cfg, local_rank, distributed):
         cfg, model, optimizer, scheduler, output_dir, save_to_disk
     )
     extra_checkpoint_data = checkpointer.load(cfg.MODEL.WEIGHT)#load the pretrained model
+
     arguments.update(extra_checkpoint_data)
 
     checkpoint_period = cfg.SOLVER.CHECKPOINT_PERIOD
@@ -143,7 +144,7 @@ def main():
     parser = argparse.ArgumentParser(description="PyTorch Object Detection Training")
     parser.add_argument(
         "--config-file",
-        default="../configs/da_ship/da_faster_rcnn_R_50_FPN_SeaShips_SMD00.yaml",#"../configs/da_ship/da_faster_rcnn_R_50_C4_SeaShips_SMD03.yaml",#
+        default="../configs/da_ship/da_faster_rcnn_R_50_FPN_SeaShips_SMD32.yaml",#"../configs/da_ship/da_faster_rcnn_R_50_C4_SeaShips_SMD03.yaml",#
         metavar="FILE",
         help="path to config file",
         type=str,
@@ -157,7 +158,7 @@ def main():
         default=False
     )
     parser.add_argument(
-        "opts",
+        "--opts",
         help="Modify config options using the command-line",
         default=['OUTPUT_DIR','logFRCNN0'
         ],
